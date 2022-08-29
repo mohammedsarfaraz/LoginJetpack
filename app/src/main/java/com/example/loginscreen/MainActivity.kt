@@ -31,16 +31,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.loginscreen.ui.theme.LoginScreenTheme
 import org.intellij.lang.annotations.JdkConstants
 
 class MainActivity : ComponentActivity() {
+
+//    val navController = NavHostController()
+    lateinit var navController: NavHostController
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
             LoginScreenTheme {
-
+                navController = rememberNavController()
                 LoginScreen()
             }
         }
@@ -51,6 +60,10 @@ class MainActivity : ComponentActivity() {
 fun LoginScreen() {
 
     val name = remember {
+        mutableStateOf("")
+    }
+
+    val password = remember {
         mutableStateOf("")
     }
     Scaffold(backgroundColor = Color.Black) {
@@ -76,47 +89,28 @@ fun LoginScreen() {
                     Button(onClick = { /*TODO*/ }
                         , shape = RoundedCornerShape(50)
                         , modifier = Modifier.size(45.dp)
-
                         , colors = ButtonDefaults.buttonColors(backgroundColor = Color.White))
                     {
 
-                        Image(painter = painterResource(id = R.drawable.ic_baseline_clear_24), contentDescription ="", modifier =
-                        Modifier.fillMaxSize(), contentScale = ContentScale.Crop,
+                        Image(painter = painterResource(id = R.drawable.ic_baseline_clear_24), contentDescription ="",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop,
 
-
-
-
-                        )
-
+                            )
                     }
 
-//                    Image(
-//                        painter = painterResource(id = R.drawable.ic_baseline_clear_24),
-//                        contentDescription = "",
-//                        modifier = Modifier
-//                            .clip(CircleShape)
-//                            .size(50.dp)
-//                            .shadow(elevation = 2.dp)
-//                            .padding(top = 25.dp, start = 15.dp)
-//                    )
-
-
+//
                     Text(
                         text = "Welcome",
                         fontSize = 40.sp,
                         modifier = Modifier.padding(start = 15.dp, top = 50.dp),
-                        fontWeight = FontWeight.ExtraBold
-                    )
-
-
-
+                        fontWeight = FontWeight.ExtraBold)
 
                     Text(
                         text = "Back",
                         fontSize = 40.sp,
                         modifier = Modifier.padding(start = 15.dp),
-                        fontWeight = FontWeight.ExtraBold
-                    )
+                        fontWeight = FontWeight.ExtraBold)
 
 
                     TextField(value = name.value,
@@ -125,80 +119,52 @@ fun LoginScreen() {
                             .padding(top = 30.dp, start = 10.dp, end = 10.dp)
                             .fillMaxWidth(),
                         colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = Color.White
-                        ),
+                            backgroundColor = Color.White),
                         placeholder = {
-                            Text(text = "UserName")
-                        })
+                            Text(text = "UserName") })
 
 
-                    TextField(value = name.value,
-                        onValueChange = { name.value = it },
+                    TextField(value = password.value,
+                        onValueChange = { password.value = it },
                         modifier = Modifier
                             .padding(top = 20.dp, start = 10.dp, end = 10.dp)
                             .fillMaxWidth(),
                         colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = Color.White
-                        ),
+                            backgroundColor = Color.White),
                         placeholder = {
-                            Text(text = "Password")
-                        })
+                            Text(text = "Password") })
 
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 50.dp, start = 10.dp, end = 35.dp)
-                        ,Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
-                         ) {
+                        ,Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically) {
+
                         Text(
                             text = "Sign in",
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontStyle = FontStyle.Normal,
-                                fontWeight = FontWeight.Bold
-                            ),
-                        )
+                                fontWeight = FontWeight.Bold),)
 
                         Button(onClick = { /*TODO*/ }
                             , shape = CircleShape
-                            , modifier = Modifier
-                                .size(70.dp)
+                            , modifier = Modifier.size(70.dp)
                             , colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFED9121)))
                         {
 
-                            Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="", modifier =
-                            Modifier
+                            Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="",
+                                modifier = Modifier
                                 .fillMaxSize(),
-                                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
-
-
-                            )
-
+                                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary))
                         }
-
-//                        Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="", modifier =
-//                            Modifier.size(50.dp)
-//                                .padding(top = 50.dp)
-//                                .clip(CircleShape)
-//
-//                        )
-//
-//                        IconButton(onClick = {  }, modifier = Modifier
-//                            .padding(top = 50.dp, end = 15.dp)
-//                            .background(color = Color.Magenta)
-//                            ) {
-//
-//                            Icon(
-//                                Icons.Filled.KeyboardArrowRight,
-//                                "contentDescription",
-//                                tint = Color.White
-//                            )
-//                        }
                     }
                     
 //
                     Row(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 50.dp),Arrangement.SpaceAround) {
+                        .padding(top = 50.dp),
+                        Arrangement.SpaceAround) {
 
                         Button(onClick = { /*TODO*/ }
                             , shape = CircleShape
@@ -206,18 +172,12 @@ fun LoginScreen() {
                             , colors = ButtonDefaults.buttonColors(backgroundColor = Color.White))
                         {
 
-                            Image(painter = painterResource(id = R.drawable.gogle), contentDescription = "", modifier =
-                            Modifier.size(35.dp).clip(CircleShape),
+                            Image(painter = painterResource(id = R.drawable.gogle), contentDescription = "",
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .clip(CircleShape),
                                 contentScale = ContentScale.Crop,)
-//                            Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="", modifier =
-//                            Modifier
-//                                .size(40.dp)
-//                                .weight(1f),
-//                                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
 //
-//
-//                            )
-
                         }
 
                         Button(onClick = { /*TODO*/ }
@@ -227,17 +187,11 @@ fun LoginScreen() {
                         {
 
                             Image(painter = painterResource(id = R.drawable.apple), contentDescription = "", modifier =
-                            Modifier.fillMaxSize().clip(CircleShape),
+                            Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape),
                                 contentScale = ContentScale.Crop,)
-//                            Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="", modifier =
-//                            Modifier
-//                                .size(40.dp)
-//                                .weight(1f),
-//                                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
 //
-//
-//                            )
-
                         }
                         Button(onClick = { /*TODO*/ }
                             , shape = CircleShape
@@ -246,16 +200,11 @@ fun LoginScreen() {
                         {
 
                             Image(painter = painterResource(id = R.drawable.facebook_wide), contentDescription = "", modifier =
-                            Modifier.size(35.dp).clip(CircleShape),
+                            Modifier
+                                .size(35.dp)
+                                .clip(CircleShape),
                             contentScale = ContentScale.Crop,)
-//                            Image(painter = painterResource(id = R.drawable.ic_baseline_keyboard_arrow_right_24), contentDescription ="", modifier =
-//                            Modifier
-//                                .size(40.dp)
-//                                .weight(1f),
-//                                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
 //
-//
-//                            )
 
                         }
                 }
@@ -272,7 +221,6 @@ fun LoginScreen() {
                            )
                        )
 
-
                             Text(text = "ForgotPassword?",
                                 style = TextStyle(fontStyle = FontStyle.Normal
                                     , fontSize = 17.sp)
@@ -287,7 +235,16 @@ fun LoginScreen() {
     }}
 
 
+@Composable
+fun Login(){
 
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "main_activity", builder = {
+        composable("DashBoard", content = { DashBoard(navController = navController)})
+
+    })
+}
 
 @Preview(showBackground = true)
 @Composable
