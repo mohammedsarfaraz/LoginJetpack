@@ -5,10 +5,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 
-@Composable
-fun SetUpNavGraph(navController: NavHostController){
-//
-//    NavHost(navController = navController){
-//
-//    }
-}
+//@Composable
+//fun SetUpNavGraph(navController: NavHostController){
+////
+////    NavHost(navController = navController){
+////
+////    }
+//}

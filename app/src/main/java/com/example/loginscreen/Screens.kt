@@ -1,8 +1,8 @@
 package com.example.loginscreen
 
-sealed class Screens(val route : String){
+sealed class Screens(){
 
-    object mainactivity:Screens(route = "mainScreen")
-    object Dashboard:Screens(route = "Dashboard")
+//    object mainactivity:Screens(route = "mainScreen")
+//    object Dashboard:Screens(route = "Dashboard")
 
 }

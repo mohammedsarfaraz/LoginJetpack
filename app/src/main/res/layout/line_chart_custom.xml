@@ -17,7 +17,7 @@
         app:chart_bg_color="#2E3975"
         app:chart_line_color="#35FFFFFF"
         app:chart_line_size="4dp"
-        app:chart_padding_bottom="40dp"
+        app:chart_padding_bottom="60dp"
         app:chart_padding_left="30dp"
         app:chart_padding_right="30dp"
         app:chart_padding_top="20dp"
